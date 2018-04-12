@@ -3,6 +3,7 @@ FROM jupyter/base-notebook
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends graphviz git vim \
+  && apt-get update && apt-get install build-essential -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
@@ -17,13 +18,29 @@ RUN conda install --yes \
     numpy==1.14.1 \
     pandas==0.22.0 \
     ipywidgets \
+    qgrid \
     jupyterlab \
     && conda clean -tipsy
+
+RUN conda install -c anaconda pymysql -y
+
+RUN conda install -c conda-forge jupyterlab -y
+
+RUN conda install -c conda-forge opencv -y
+
+RUN conda install qgrid -y
+
+RUN conda install -c bioconda/label/deprecated joblib -y
+
+RUN conda install -c conda-forge pip -y
+
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 RUN pip install graphviz \
                 --no-cache-dir \
                 --no-dependencies
+
+RUN pip install fancyimpute
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
