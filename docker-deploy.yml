@@ -1,6 +1,22 @@
 version: '3.1'
 
 services:
+
+  airflow:
+    build:
+      context: ./base
+      dockerfile: Dockerfile
+    image: daskdev/dask
+    hostname: airflow
+    ports:
+      - "8080:8080"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - webnet
+
   scheduler:
     build:
       context: ./base

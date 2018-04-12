@@ -15,6 +15,8 @@ RUN conda install --yes \
     pandas==0.22.0 \
     && conda clean -tipsy
 
+RUN pip install apache-airflow
+
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
 
