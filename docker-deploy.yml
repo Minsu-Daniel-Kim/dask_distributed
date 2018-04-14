@@ -2,26 +2,12 @@ version: '3.1'
 
 services:
 
-  airflow:
-    build:
-      context: ./base
-      dockerfile: Dockerfile
-    image: kaj011/dask
-    hostname: airflow
-    ports:
-      - "8080:8080"
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-    networks:
-      - webnet
-
+ 
   scheduler:
     build:
       context: ./base
       dockerfile: Dockerfile
-    image: kaj011/dask
+    image: daskdev/dask
 
     logging:
       driver: "json-file"
@@ -45,7 +31,7 @@ services:
     build:
       context: ./notebook
       dockerfile: Dockerfile
-    image: kaj011/dask-notebook
+    image: daskdev/dask-notebook
     hostname: notebook
     ports:
       - "8888:8888"
@@ -60,7 +46,7 @@ services:
     build:
       context: ./base
       dockerfile: Dockerfile
-    image: kaj011/dask
+    image: daskdev/dask
     hostname: dask-worker
     deploy:
       mode: global
