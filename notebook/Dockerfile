@@ -25,6 +25,7 @@ RUN conda install --yes \
     opencv \ 
     pip \
     joblib \
+    awscli \
     jupyterlab \
     && conda clean -tipsy
 
