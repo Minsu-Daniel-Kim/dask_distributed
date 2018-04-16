@@ -46,7 +46,7 @@ services:
     build:
       context: ./base
       dockerfile: Dockerfile
-    image: daskdev/dask
+    image: kaj011/dask
     hostname: dask-worker
     deploy:
       mode: global
