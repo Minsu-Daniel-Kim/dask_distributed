@@ -12,6 +12,7 @@ USER $NB_USER
 RUN conda update conda && conda install "conda=4.4.7"
 RUN conda config --add channels conda-forge
 RUN conda config --add channels anaconda
+RUN conda install -c anaconda boto3 -y
 RUN conda install --yes \
     python-blosc \
     cytoolz \
