@@ -1,22 +1,23 @@
 FROM jupyter/base-notebook
 
 USER root
-RUN apt-get update \
-  && apt-get install -yq --no-install-recommends graphviz git vim \
-  && apt-get update && apt-get install build-essential -y \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -yq --no-install-recommends graphviz git vim
+RUN apt-get install build-essential -y
+RUN apt-get update 
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
 RUN conda update conda && conda install "conda=4.4.7"
 RUN conda install --yes \
     python-blosc \
     cytoolz \
-    dask==0.17.1  \
-    distributed==1.21.1 \
+    dask \
+    distributed \
     nomkl \
-    numpy==1.14.1 \
-    pandas==0.22.0 \
+    numpy \
+    pandas \
     ipywidgets \
     qgrid \
     jupyterlab \
@@ -24,11 +25,7 @@ RUN conda install --yes \
 
 RUN conda install -c anaconda pymysql -y
 
-RUN conda install -c conda-forge jupyterlab -y
-
 RUN conda install -c conda-forge opencv -y
-
-RUN conda install qgrid -y
 
 RUN conda install -c bioconda/label/deprecated joblib -y
 

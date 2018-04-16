@@ -7,7 +7,7 @@ services:
     build:
       context: ./base
       dockerfile: Dockerfile
-    image: daskdev/dask
+    image: kaj011/dask
 
     logging:
       driver: "json-file"
@@ -31,7 +31,7 @@ services:
     build:
       context: ./notebook
       dockerfile: Dockerfile
-    image: daskdev/dask-notebook
+    image: kaj011/dask-notebook
     hostname: notebook
     ports:
       - "8888:8888"

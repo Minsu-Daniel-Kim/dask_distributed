@@ -1,28 +1,25 @@
-FROM continuumio/miniconda
+FROM continuumio/miniconda3
 
 # Dumb init
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
-RUN apt-get update && apt-get install build-essential -y \
+RUN apt-get update
+RUN apt-get install build-essential -y
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda update conda && conda install "conda=4.4.7"
 RUN conda install --yes \
     python-blosc \
     cytoolz \
-    dask==0.17.2  \
-    distributed==1.21.4 \
+    dask \
+    distributed \
     nomkl \
-    numpy==1.14.1 \
-    pandas==0.22.0 \
+    numpy \
+    pandas \
     && conda clean -tipsy
     
 RUN conda install -c anaconda pymysql -y
 
-RUN conda install -c conda-forge jupyterlab -y
-
 RUN conda install -c conda-forge opencv -y
-
-RUN conda install qgrid -y
 
 RUN conda install -c bioconda/label/deprecated joblib -y
 
