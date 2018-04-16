@@ -10,28 +10,26 @@ RUN rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
 RUN conda update conda && conda install "conda=4.4.7"
+RUN conda config --add channels conda-forge
+RUN conda config --add channels anaconda
 RUN conda install --yes \
     python-blosc \
     cytoolz \
-    dask \
-    distributed \
+    dask==0.17.2  \
+    distributed==1.21.6 \
     nomkl \
-    numpy \
-    pandas \
-    ipywidgets \
-    qgrid \
+    numpy==1.14.2 \
+    pandas==0.22.0 \
+    ipywidgets \ 
+    pymysql \ 
+    opencv \ 
+    pip \
+    joblib \
     jupyterlab \
     && conda clean -tipsy
 
-RUN conda install -c anaconda pymysql -y
-
-RUN conda install -c conda-forge opencv -y
-
-RUN conda install -c bioconda/label/deprecated joblib -y
-
-RUN conda install -c conda-forge pip -y
-
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34.0
+RUN jupyter labextension install qgrid
 
 RUN pip install graphviz \
                 --no-cache-dir \
